@@ -25,3 +25,12 @@ export const verifyJWT = asyncHandler(async(req,res,next)=>{
         throw new ApiError(401, error?.message || "Invalid access token");
     }
 })
+
+export const verifyAdmin = (req, res, next) => {
+    // This relies on verifyJWT running first to populate req.user
+    if (req.user && req.user.role === "admin") {
+        next();
+    } else {
+        return next(new ApiError(403, "Access denied. Admin privileges required."));
+    }
+};

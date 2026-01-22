@@ -9,6 +9,9 @@ import AppLayout from './components/layout/AppLayout'
 import ProjectDetailsPage from './pages/ProjectDetailsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import RegisterPage from './pages/RegisterPage'
+import AdminDashboard from './pages/AdminDashboard'
+import RequireAdmin from './components/auth/RequireAdmin'
+
 
 const App = () => {
 
@@ -31,6 +34,9 @@ const App = () => {
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/projects/:id" element={<ProjectDetailsPage />} />
             </Route>   
+        </Route>
+        <Route element={<RequireAdmin/>}>
+          <Route path="/admin" element={<AdminDashboard />} />
         </Route>
         <Route path="*" element={<NotFoundPage/>} />
 

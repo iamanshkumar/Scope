@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Folder, LogOut, Layers ,  Moon, Sun } from 'lucide-react';
+import { LayoutDashboard, Folder, LogOut, Layers ,  Moon, Sun  , Shield} from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
-  const { logout } = useAuth();
+  const { user , logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
 
   // 1. Make sure this array exists and has data!
@@ -23,9 +24,8 @@ const Sidebar = () => {
         <span className="font-bold text-xl text-slate-900 dark:text-white">Scope.</span>
       </div>
 
-      {/* 2. CHECK THIS SECTION CAREFULLY */}
       <nav className="flex-1 p-4 space-y-1">
-        {navItems.map((item) => (  // <--- Must be a PARENTHESIS '(', not a curly brace '{'
+        {navItems.map((item) => (  
           <NavLink
             key={item.path}
             to={item.path}
@@ -40,7 +40,20 @@ const Sidebar = () => {
             <item.icon size={20} className="mr-3" />
             {item.label}
           </NavLink>
-        ))} {/* <--- Closing PARENTHESIS ')' */}
+        ))} 
+
+{user?.role === 'admin' && (
+        <>
+          <div className="my-4 border-t border-slate-800/50 mx-4"></div>
+          <Link 
+            to="/admin" 
+            className="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors mx-2 rounded-lg"
+          >
+            <Shield size={20} className="text-purple-400" />
+            <span className="font-medium">System Admin</span>
+          </Link>
+        </>
+      )}
       </nav>
 
       {/* Footer */}

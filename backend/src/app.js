@@ -5,6 +5,7 @@ import authRouter from "./modules/auth/auth.routes.js"
 import projectRouter from "./modules/projects/project.routes.js"
 import taskRouter from "./modules/tasks/task.routes.js"
 import dashboardRouter from "./modules/dashboard/dashboard.routes.js"
+import adminRouter from "./modules/admin/admin.routes.js"
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use("/api/v1/auth", authRouter)
 app.use("/api/v1/projects", projectRouter)
 app.use("/api/v1/tasks", taskRouter)
 app.use("/api/v1/dashboard", dashboardRouter);
+app.use("/api/v1/admin", adminRouter);
 
 app.get("/",(req,res)=>{
     res.status(200).json({
